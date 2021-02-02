@@ -1,0 +1,64 @@
+#hero {
+  background-image: url("Assets/heroImageSwitzerland.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  border: 2px solid;
+  /* padding: 10px; */
+  box-shadow: 0px 15px #e8e8e8;
+}
+
+#userCity {
+  opacity: 0.5;
+}
+
+#userCity:focus {
+  opacity: 1;
+}
+
+#cardOne {
+  background-image: url("Assets/Bali-Black&White.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#cardOne:hover {
+  background-image: url("Assets/Bali.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#cardTwo {
+  background-image: url("Assets/Paris-Black&White.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#cardTwo:hover {
+  background-image: url("Assets/Paris.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#cardThree {
+  background-image: url("Assets/Mykonos- Black&White.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#cardThree:hover {
+  background-image: url("Assets/Mykonos.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#btnFavourite:hover {
+  font-weight: bold;
+}
