@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<<<<<<< HEAD
     <!-- the following two links is to use the toggle for navbar -->
     <!--line 8 doesn't work so we commented it out-->
+=======
+    <!-- thh following two links is to use the toggle for navbar -->
+>>>>>>> 3c9264bea4e1eac259a911e43af3d50529ddbd4b
     <!-- <script src=“https://code.jquery.com/jquery-2.1.3.min.js”></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     <!-- the following link is used to get the time-->
@@ -37,9 +41,11 @@
             <!-- <a href="#"><img id="logo" src="Assets/icon.png" style="position: fixed; top: 5px; left: 5px;" width="50px" height="50px"></a> -->
            <h3 style=" color: white; margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">“Once a year, go someplace you’ve never been before”</h3>
             <div style="top: 80%; left: 37%; position: absolute; width: auto;">
-                <input id="userCity" type="text" class="form-control" placeholder="Enter your destination" style="width: 300px; display: inline; ">
-                <!-- <input style="width: 300px;"> -->
-                <button type="button" class="btn btn-primary">Search</button>
+                <form onSubmit="search(event)" id="searchForm">
+                    <input id="userCity" type="text" class="form-control" placeholder="Enter your destination" style="width: 300px; display: inline; ">
+                    <!-- <input style="width: 300px;"> -->
+                    <button type="submit" class="btn btn-primary" form="searchForm">Search</button>
+                </form>
             </div> <!--end of search input and button container-->
         </div> <!--end of hero container-->
         <br/>
@@ -72,7 +78,10 @@
         
     </div> <!--end of homepage-->
     <div id="search-results">
-
+        <nav></nav>
+        <div id="city-list">
+            
+        </div>
     </div>
     <div id="favourites">
 
@@ -130,6 +139,7 @@
         </div> <!--end of weather container-->
     </div> <!-- city information ends here-->
 
+<<<<<<< HEAD
     <script>
 
         // a function that takes two parameters; city name & state code to display the weather
@@ -287,5 +297,9 @@
       }
 
     </script>
+=======
+    </div>
+    <script src="script.js"></script>
+>>>>>>> 3c9264bea4e1eac259a911e43af3d50529ddbd4b
 </body>
 </html>
