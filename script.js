@@ -1,5 +1,23 @@
 var userCity
 
+async function search(event) {
+    event.preventDefault()
+
+    // prevent search if nothing has been typed.
+    if (document.getElementById("userCity").value !== "") {
+        var resultList
+        // get search results for the user
+        await cityNames(document.getElementById("userCity").value).then(r => resultList = r)
+        // hide homepage
+        document.getElementById("homepage").setAttribute("hidden", " ")
+        // FUNCTION THAT MAKES SEARCH RESULTS PAGE GOES HERE
+
+        // 
+        console.log(resultList)
+    }
+
+}
+
 async function cityNames(userCity) {
     var list = []
 
@@ -30,9 +48,9 @@ async function cityNames(userCity) {
     for (var i = 0; i < list.length; i++) {
         if (list[i]["nearestCity"] !== "none") {
             var imageData = await fetch(`${list[i].nearestCity}images/`).then(r => r.json())
-            var image= imageData.photos[0].image.mobile
+            var image = imageData.photos[0].image.mobile
         } else {
-            var image= `Assets/default_thumbnails/default${Math.floor(Math.random() * 11)}`
+            var image = `Assets/default_thumbnails/default${Math.floor(Math.random() * 10) + 1}`
         }
         list[i]["image"] = image
     }
@@ -41,5 +59,4 @@ async function cityNames(userCity) {
 }
 
 
-var test
-cityNames("London").then(r => test = r)
+
