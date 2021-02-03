@@ -1,3 +1,4 @@
+/* Stylings for homepage */
 #hero {
   background-image: url("Assets/heroImageSwitzerland.jpg");
   background-position: center;
@@ -61,5 +62,11 @@
 
 #btnFavourite:hover {
   font-weight: bold;
+}
+
+/* Stylings for Search Result Page */
+#search-results{
+  height: 100vh;
+  background-color: #e8e8e8;
 }
 

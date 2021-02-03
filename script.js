@@ -2,14 +2,18 @@ var userCity
 
 async function search(event) {
     event.preventDefault()
-
+    // 
     // prevent search if nothing has been typed.
     if (document.getElementById("userCity").value !== "") {
         var resultList
         // get search results for the user
         await cityNames(document.getElementById("userCity").value).then(r => resultList = r)
-        // hide homepage
+        // hide other pages
         document.getElementById("homepage").setAttribute("hidden", " ")
+        document.getElementById("favourites").setAttribute("hidden", " ")
+        document.getElementById("city-information").setAttribute("hidden", " ")
+        document.getElementById("search-results").removeAttribute("hidden")
+        
         // FUNCTION THAT MAKES SEARCH RESULTS PAGE GOES HERE
 
         // 
