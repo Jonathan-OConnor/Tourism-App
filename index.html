@@ -12,6 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
     <title>Tourism</title>
 </head>
 <body>
@@ -207,6 +209,10 @@
             <!--end of weather main row-->
         </div>
         <!--end of weather container-->
+         <!-- Map API-->
+        <div 
+        id='map' style='width: 1000px; height: 300px;' class = 'container col w-100'>
+    </div>
     </div>
     <script src = "script.js"></script>
     <script>
@@ -363,6 +369,74 @@
             document.querySelector('#tempFive').innerHTML = temp;
             document.querySelector('#humiFive').innerHTML = humi;
         }
+
+    </script>
+    <script>
+
+        let lng = "-79.3832"
+        let lat = "43.6532"
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYWxleGdvbGRtYW45OCIsImEiOiJja2tvY21tODIwZnhhMm9udjRvZmpieWtuIn0.TexdX_a_a6lxPC5SGJAIaA';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+            center: [lng, lat], // starting position [lng, lat]
+            pitch: 60,
+            bearing: -60,
+            zoom: 10, // starting zoom
+            antialias: true,
+            //["heatmap-density"]: .1,
+        });
+
+        map.on('load', function () {
+            // Insert the layer beneath any symbol layer.
+            var layers = map.getStyle().layers;
+
+            var labelLayerId;
+            for (var i = 0; i < layers.length; i++) {
+                if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+                    labelLayerId = layers[i].id;
+                    break;
+                }
+            }
+
+            map.addLayer(
+                {
+                    'id': '3d-buildings',
+                    'source': 'composite',
+                    'source-layer': 'building',
+                    'filter': ['==', 'extrude', 'true'],
+                    'type': 'fill-extrusion',
+                    'minzoom': 15,
+                    'paint': {
+                        'fill-extrusion-color': '#aaa',
+
+                        // use an 'interpolate' expression to add a smooth transition effect to the
+                        // buildings as the user zooms in
+                        'fill-extrusion-height': [
+                            'interpolate',
+                            ['linear'],
+                            ['zoom'],
+                            15,
+                            0,
+                            15.05,
+                            ['get', 'height']
+                        ],
+                        'fill-extrusion-base': [
+                            'interpolate',
+                            ['linear'],
+                            ['zoom'],
+                            15,
+                            0,
+                            15.05,
+                            ['get', 'min_height']
+                        ],
+                        'fill-extrusion-opacity': 0.6
+                    }
+                },
+                labelLayerId
+            );
+        });
 
     </script>
 </body>
