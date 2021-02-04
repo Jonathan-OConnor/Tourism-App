@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+<div class="container">
+    <div class="row">
+        <div id="cardCurrency" class="card col-12 col-lg-4 col-xl-4" style="margin-right: 20px;">
+            <h3 style="background-color: #0C6EFD; text-align: center; color: white; margin-top: 10px;">Currency</h3>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col" style="border-right: 1px solid black;">
+                        <div style="text-align: center;">
+                            <p style="display: inline; font-size:3em;">1:00</p><p style="display: inline;">CAD</p> </div>
+                        </div>
+                    <div class="col">
+                        <div style="text-align: center;">
+                            <p id="countryCurrencyPrice" style="display: inline; font-size:3em;">1:00</p><p id="countryCurrency" style="display: inline;">CAD</p>
+                        </div>  
+                     </div> <!--end of col-->
+             </div> <!--end of row-->
+                <!-- <h4><span id="cityName">Toronto</span> - <span id="dateNow"></span> <img id="icon"></h4>
+                <p>Temperature: <span id="temperature"></span> &#8457;</p>
+                <p>Humidity: <span id="humidity"></span> &percnt;</p>
+                <p>Wind Speed: <span id="windSpeed"></span> MPH</p>
+                <p>UV Index: <span id="UVIndex" style=" color: white;"></span></p> -->
+            </div>
+        </div> <!-- currency card ends here-->
+        <div class="card col-12 col-lg-7 col-xl-7">
+            <h3 style="background-color: #0C6EFD; text-align: center; color: white; margin-top: 10px;">Popular Destination</h3>
+            <div class="card-body">
+                <h4><span id="cityName">Toronto</span> - <span id="dateNow"></span> <img id="icon"></h4>
+                <p>Something</p>
+                <p>Something</p>
+                <p>Something</p>
+                <p>Something</p>
+            </div>
+        </div> <!-- destination card ends here-->
+    </div> <!-- row for currency and popular destination ends here-->
+</div> <!-- end of currency and popular destination container-->
+
+
+    <script>
+// referece for where I got the list from: http://data.fixer.io/api/symbols?access_key=866a486759915ac30d596f1bac3b48bb
+// reference for country code: https://www.iban.com/country-codes
+        var currencyList = {
+                    "AE":"AED",
+                    "AF":"AFN",
+                    "AL":"ALL",
+                    "AM":"AMD",
+                    "AN":"ANG",
+                    "AO":"AOA",
+                    "AR":"ARS",
+                    "AU":"AUD",
+                    // "AWG": "Aruban Florin",
+                    "AZ":"AZN",
+                    "BA":"BAM", // "Bosnia-Herzegovina Convertible Mark",
+                    "BB":"BBD",
+                    "BD":"BDT",
+                    "BG":"BGN",
+                    "BH":"BHD",
+                    "BI":"BIF",
+                    "BM":"BMD",
+                    "BN":"BND",
+                    "BO":"BOB",
+                    "BR":"BRL",
+                    "BS":"BSD",
+                    "BT":"BTN",
+                    "BW":"BWP",
+                    "BY":"BYN", //: "New Belarusian Ruble",
+                    "BY":"BYR",
+                    "BZ":"BZD", //"Belize Dollar",
+                    "CA":"CAD",
+                    "CD":"CDF", //: "Congolese Franc",
+                    "CH":"CHF",
+                    // "CLF":"Chilean Unit of Account (UF)",
+                    "CL":"CLP",
+                    "CN":"CNY",
+                    "CO":"COP",
+                    "CR":"CRC",
+                    // :"CUC": "Cuban Convertible Peso",
+                    "CU":"CUP",
+                    "CV":"CVE", //"Cape Verdean Escudo",
+                    "CZ":"CZK",
+                    "DJ":"DJF",
+                    "DK":"DKK", //: "Danish Krone",
+                    "DM":"DOP",
+                    "DZ":"DZD",
+                    "EG":"EGP",
+                    "ER":"ERN",
+                    "ET":"ETB",
+                    "EUR": "Euro", //
+                    "FJ":"FJD",
+                    "FK":"FKP", //"Falkland Islands Pound", //
+                    "GB":"GBP", //"British Pound Sterling",
+                    "GE":"GEL", //"Georgian Lari",
+                    "GG":"GGP", // "Guernsey Pound", //
+                    "GH":"GHS", //: "Ghanaian Cedi", //
+                    "GI":"GIP", //"Gibraltar Pound", //
+                    "GM":"GMD",  //"Gambian Dalasi",
+                    "GN":"GNF", //"Guinean Franc",
+                    "GT":"GTQ", // "Guatemalan Quetzal",
+                    "GY":"GYD", //"Guyanaese Dollar",
+                    "HK":"HKD", //"Hong Kong Dollar",
+                    "HN":"HNL", //"Honduran Lempira",
+                    "HR":"HRK", //"Croatian Kuna",
+                    "HR":"HTG", //"Haitian Gourde",
+                    "HU":"HUF", //"Hungarian Forint",
+                    "ID":"IDR", //"Indonesian Rupiah",
+                    "IL":"ILS", //"Israeli New Sheqel",
+                    "IM":"IMP", //"Manx pound", //
+                    "IN":"INR", //"Indian Rupee",
+                    "IQ":"IQD", //"Iraqi Dinar",
+                    "IR":"IRR", //"Iranian Rial",
+                    "IS":"ISK", //"Icelandic Króna",
+                    "JE":"JEP",  //"Jersey Pound",
+                    "JM":"JMD", //"Jamaican Dollar",
+                    "JO":"JOD", //"Jordanian Dinar",
+                    "JP":"JPY", //"Japanese Yen",
+                    "KE":"KES", //"Kenyan Shilling",
+                    "KZ":"KGS", //"Kyrgystani Som",
+                    "KH":"KHR", //"Cambodian Riel",
+                    "KM":"KMF", //"Comorian Franc",
+                    "KP":"KPW", //"North Korean Won",
+                    "KR":"KRW", //"South Korean Won",
+                    "KW":"KWD", //"Kuwaiti Dinar",
+                    "KY":"KYD", //"Cayman Islands Dollar",//
+                    "KZ":"KZT",  //"Kazakhstani Tenge",
+                    "LA":"LAK", //"Laotian Kip",
+                    "LB":"LBP", //"Lebanese Pound",
+                    "LK":"LKR", //"Sri Lankan Rupee",
+                    "LR":"LRD", //"Liberian Dollar",
+                    "LS":"LSL", //"Lesotho Loti",
+                    "LT":"LTL", //"Lithuanian Litas",
+                    "LV":"LVL", //"Latvian Lats",
+                    "LY":"LYD", //"Libyan Dinar",
+                    "MA":"MAD", //"Moroccan Dirham",
+                    "MD":"MDL", //"Moldovan Leu",
+                    "MG":"MGA", //"Malagasy Ariary",
+                    "MK":"MKD", // "Macedonian Denar",
+                    "MM":"MMK", //"Myanma Kyat",
+                    "MN":"MNT", //"Mongolian Tugrik",
+                    "MO":"MOP", // "Macanese Pataca",
+                    "MR":"MRO", //"Mauritanian Ouguiya",
+                    "MU":"MUR", //"Mauritian Rupee",
+                    "MV":"MVR", //"Maldivian Rufiyaa",
+                    "MW":"MWK", //"Malawian Kwacha",
+                    "MX":"MXN", //"Mexican Peso",
+                    "MY":"MYR", //"Malaysian Ringgit",
+                    "MZ":"MZN", //"Mozambican Metical",
+                    "NA":"NAD", //"Namibian Dollar",
+                    "NG":"NGN", //"Nigerian Naira",
+                    "NI":"NIO", //"Nicaraguan Córdoba",
+                    "NO":"NOK", //"Norwegian Krone",
+                    "NP":"NPR", //"Nepalese Rupee",
+                    "NZ":"NZD", //"New Zealand Dollar",
+                    "OM":"OMR", //"Omani Rial",
+                    "PA":"PAB", // "Panamanian Balboa",
+                    "PE":"PEN", //"Peruvian Nuevo Sol",
+                    "PG":"PGK", //"Papua New Guinean Kina",
+                    "PH":"PHP", //"Philippine Peso",
+                    "PK":"PKR", //"Pakistani Rupee",
+                    "PL":"PLN", //"Polish Zloty",
+                    "PY":"PYG", //"Paraguayan Guarani",
+                    "QA":"QAR", //"Qatari Rial",
+                    "RO":"RON", // "Romanian Leu",
+                    "RS":"RSD", //"Serbian Dinar",
+                    "RU":"RUB", //"Russian Ruble",
+                    "RW":"RWF", //"Rwandan Franc",
+                    "SA":"SAR", //"Saudi Riyal",
+                    "SB":"SBD", //"Solomon Islands Dollar",
+                    "SC":"SCR", //"Seychellois Rupee",
+                    "SD":"SDG", //"Sudanese Pound",
+                    "SW":"SEK", //"Swedish Krona",
+                    "SG":"SGD", //"Singapore Dollar",
+                    "SH":"SHP", //"Saint Helena Pound",
+                    "SL":"SLL", //"Sierra Leonean Leone",
+                    "SO":"SOS", //"Somali Shilling",
+                    "SR":"SRD", //"Surinamese Dollar",
+                    "ST":"STD", //"São Tomé and Príncipe Dobra",
+                    "SV":"SVC", //"Salvadoran Colón",
+                    "SY":"SYP", //"Syrian Pound",
+                    "SZ":"SZL", //"Swazi Lilangeni",
+                    "TH":"THB", //"Thai Baht",
+                    "TJ":"TJS",  //"Tajikistani Somoni",
+                    "TM":"TMT", //"Turkmenistani Manat",
+                    "TN":"TND", //"Tunisian Dinar",
+                    "TO":"TOP", //"Tongan Paʻanga",
+                    "TR":"TRY", //"Turkish Lira",
+                    "TT":"TTD", //"Trinidad and Tobago Dollar",
+                    "TW":"TWD", // "New Taiwan Dollar",
+                    "TZ":"TZS", // "Tanzanian Shilling",
+                    "UA":"UAH", // "Ukrainian Hryvnia",
+                    "UG":"UGX", // "Ugandan Shilling",
+                    "US":"USD", // "United States Dollar",
+                    "UY":"UYU", // "Uruguayan Peso",
+                    "UZ":"UZS", // "Uzbekistan Som",
+                    "VE":"VEF", //"Venezuelan Bolívar Fuerte",
+                    "VN":"VND", //"Vietnamese Dong",
+                    "VU":"VUV", //"Vanuatu Vatu",
+                    "WS":"WST", //"Samoan Tala",
+                    // "XAF": "CFA Franc BEAC",
+                    // "XAG": "Silver (troy ounce)",
+                    // "XAU": "Gold (troy ounce)",
+                    // "XCD": "East Caribbean Dollar",
+                    // "XDR": "Special Drawing Rights",
+                    // "XOF": "CFA Franc BCEAO",
+                    // "XPF": "CFP Franc",
+                    "YE":"YER", //"Yemeni Rial",
+                    "ZA":"ZAR", //"South African Rand",
+                    // "ZMK": "Zambian Kwacha (pre-2013)",
+                    "ZM":"ZMW", //"Zambian Kwacha",
+                    "ZW":"ZWL", //: "Zimbabwean Dollar"
+                    "AT":"EUR",
+                    "BE":"EUR",
+                    "CY":"EUR",
+                    "EE":"EUR",
+                    "FI":"EUR",
+                    "FR":"EUR",
+                    "DE":"EUR",
+                    "GR":"EUR",
+                    "IE":"EUR",
+                    "IT":"EUR",
+                    "LT":"EUR",
+                    "LU":"EUR",
+                    "MT":"EUR",
+                    "NL":"EUR",
+                    "PT":"EUR",
+                    "SK":"EUR",
+                    "SI":"EUR",
+                    "ES":"EUR"
+}
+
+// To get the currency price of a country, just pass the two letter state code as a parameter for this function
+async function getCurrency(stateCode) {
+   var currency = currencyList[stateCode]
+   // Checks the parameter is correct value
+   if(currency !== undefined){
+    console.log(typeof(currency));
+            var currencyApi = await fetch(`https://v6.exchangerate-api.com/v6/67ba228e2ad76ea25d6d5138/latest/CAD`).then(r => r.json())
+            var exchangePrice = currencyApi.conversion_rates[currency];
+            console.log("Current price: " + exchangePrice);     
+            document.querySelector('#countryCurrencyPrice').innerHTML = exchangePrice;
+            document.querySelector('#countryCurrency').innerHTML = currency;
+   }
+   else{
+            document.querySelector('#countryCurrencyPrice').innerHTML = "No data to show";
+            document.querySelector('#countryCurrency').innerHTML = "";        
+   }
+}
+
+getCurrency("FR");
+
+    </script>
+</body>
+</html>
