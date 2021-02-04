@@ -59,7 +59,7 @@ function buildCityPage(cityObject) {
     makeWeather(cityObject.name, cityObject.countryCode)
 
     // build currency
-    // getCurrency(cityInformation.countryCode)
+    getCurrency(cityInformation.countryCode)
 
     // build interesting places
     getPlaces( cityObject.long, cityObject.lat)
