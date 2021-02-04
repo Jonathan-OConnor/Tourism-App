@@ -9,13 +9,53 @@ async function search(event) {
         // get search results for the user
         await cityNames(document.getElementById("userCity").value).then(r => resultList = r)
         // hide other pages
+        document.getElementById("results").innerHTML = ""
         showSearchPage()
-        
-        // FUNCTION THAT MAKES SEARCH RESULTS PAGE GOES HERE
 
+        // FUNCTION THAT MAKES SEARCH RESULTS PAGE
+        for (var i = 0; i < resultList.length; i++) {
+            var bodyText = `${resultList[i].name} - ${resultList[i].countryName}`
+            var backgroundImage = resultList[i].image
+
+            var column = document.createElement("div")
+            column.setAttribute("class", " col-12-xsm col-sm-6 col-lg-4")
+
+            var card = document.createElement("div")
+            card.setAttribute("style", `position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url("${backgroundImage}"); background-position: center; background-size: cover; margin-top: 20px;`)
+
+            var cardBody = document.createElement("div")
+            cardBody.setAttribute("class", "card-body")
+            cardBody.setAttribute("style", "margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);")
+
+            var text = document.createElement("button")
+            text.setAttribute("class", "btn btn-primary")
+            var test = JSON.stringify(resultList[i])
+            text.setAttribute("onClick", `buildCityPage(${test})`)
+            text.innerText = bodyText
+
+            column.appendChild(card)
+            card.appendChild(cardBody)
+            cardBody.appendChild(text)
+            document.getElementById("results").appendChild(column)
+        }
         // 
         console.log(resultList)
     }
+}
+
+function buildCityPage(cityObject) {
+ 
+
+    // build weather
+    makeWeather(cityObject.name, cityObject.countryCode)
+    // build currency
+    // getCurrency(cityInformation.countryCode)
+    // build interesting places
+    // getPlaces(cityInformation.name, cityInformation.countryCode, cityInformation.lat, cityInformation.long)
+    // build map
+    // buildMap(cityInformation.lat, cityInformation.long)
+    // navigate to city page
+    showCityPage()
 
 }
 
@@ -51,16 +91,16 @@ async function cityNames(userCity) {
             var imageData = await fetch(`${list[i].nearestCity}images/`).then(r => r.json())
             var image = imageData.photos[0].image.mobile
         } else {
-            var image = `Assets/default_thumbnails/default${Math.floor(Math.random() * 10) + 1}`
+            var image = `Assets/default_thumbnails/default${Math.floor(Math.random() * 10) + 1}.jpg`
         }
         list[i]["image"] = image
     }
 
     return list
 }
+// functions to navigate pages
+function showHomePage() {
 
-function showHomePage(){
-  
     document.querySelector('#homepage').classList.remove("d-none")
     document.querySelector('#favourites').classList.add('d-none')
     document.querySelector('#search-results').classList.add('d-none')
@@ -68,8 +108,8 @@ function showHomePage(){
     console.log('clicked ')
 }
 
-function showSearchPage(){
-  
+function showSearchPage() {
+
     document.querySelector('#homepage').classList.add("d-none")
     document.querySelector('#favourites').classList.add('d-none')
     document.querySelector('#search-results').classList.remove('d-none')
@@ -77,12 +117,166 @@ function showSearchPage(){
     console.log('clicked ')
 }
 
-function showFavouritesPage(){
+function showFavouritesPage() {
 
     document.querySelector('#homepage').classList.add("d-none")
     document.querySelector('#favourites').classList.remove('d-none')
     document.querySelector('#search-results').classList.add('d-none')
     document.querySelector('#city-information').classList.add('d-none')
     console.log('clicked ')
+}
 
+function showCityPage() {
+    document.querySelector('#homepage').classList.add("d-none")
+    document.querySelector('#favourites').classList.add('d-none')
+    document.querySelector('#search-results').classList.add('d-none')
+    document.querySelector('#city-information').classList.remove('d-none')
+    console.log('clicked ')
+}
+
+
+// functions used to get weather data for the city
+async function makeWeather(city, stateCode) {
+
+
+    var cityApi = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)},${stateCode}&appid=c18d1c67b725426cb4da6690f0f0a919`).then(r => r.json())
+    var cityLon = cityApi.coord.lon;
+    var cityLat = cityApi.coord.lat;
+
+    // takes the name of the city and display it a value of CityName
+    document.querySelector('#cityName').innerHTML = cityApi.name
+
+    getCityData(cityLon, cityLat);
+    // cities.push(city);
+    //  addCity();
+
+    // console.log(city);   
+}
+
+async function getCityData(lon, lat) {
+    var cityDataApi = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=c18d1c67b725426cb4da6690f0f0a919`).then(r => r.json())
+
+    var temperature = cityDataApi.current.temp;
+    var humadity = cityDataApi.current.humidity;
+    var windSpeed = cityDataApi.current.wind_speed;
+    var uvIndex = cityDataApi.current.uvi;
+    var icon = cityDataApi.current.weather[0].icon;
+
+
+    if (uvIndex >= 0 && uvIndex <= 2) {
+        document.querySelector('#UVIndex').style.backgroundColor = "green";
+        document.querySelector('#UVIndex').style.color = "white";
+    }
+    else if (uvIndex >= 3 && uvIndex <= 5) {
+        document.querySelector('#UVIndex').style.backgroundColor = "yellow";
+        document.querySelector('#UVIndex').style.color = "black";
+    }
+    else if (uvIndex >= 6 && uvIndex <= 7) {
+        document.querySelector('#UVIndex').style.backgroundColor = "orange";
+    }
+    else if (uvIndex >= 11 && uvIndex <= 10) {
+        document.querySelector('#UVIndex').style.backgroundColor = "red";
+        document.querySelector('#UVIndex').style.color = "white";
+    }
+    else if (uvIndex >= 11) {
+        document.querySelector('#UVIndex').style.backgroundColor = "purple";
+    }
+    var dayOneForecast = {
+        dateOne: moment().add(1, 'days').format('MMMM Do YYYY'),
+        temp: cityDataApi.daily[1].temp.day,
+        humi: cityDataApi.daily[1].humidity,
+        icon: cityDataApi.daily[1].weather[0].icon
+    }
+
+    var dayTwoForecast = {
+        dateTwo: moment().add(2, 'days').format('MMMM Do YYYY'),
+        temp: cityDataApi.daily[2].temp.day,
+        humi: cityDataApi.daily[2].humidity,
+        icon: cityDataApi.daily[2].weather[0].icon
+    }
+
+    var dayThreeForecast = {
+        dateThree: moment().add(3, 'days').format('MMMM Do YYYY'),
+        temp: cityDataApi.daily[3].temp.day,
+        humi: cityDataApi.daily[3].humidity,
+        icon: cityDataApi.daily[3].weather[0].icon
+    }
+
+    var dayFourForecast = {
+        dateFour: moment().add(4, 'days').format('MMMM Do YYYY'),
+        temp: cityDataApi.daily[4].temp.day,
+        humi: cityDataApi.daily[4].humidity,
+        icon: cityDataApi.daily[4].weather[0].icon
+    }
+
+    var dayFiveForecast = {
+        dateFive: moment().add(5, 'days').format('MMMM Do YYYY'),
+        temp: cityDataApi.daily[5].temp.day,
+        humi: cityDataApi.daily[5].humidity,
+        icon: cityDataApi.daily[5].weather[0].icon
+    }
+
+    showCurrentWeather(temperature, humadity, windSpeed, uvIndex, icon)
+
+    dayOne(dayOneForecast.dateOne, `https://openweathermap.org/img/wn/${dayOneForecast.icon}.png`, dayOneForecast.temp, dayOneForecast.humi)
+
+    dayTwo(dayTwoForecast.dateTwo, `https://openweathermap.org/img/wn/${dayTwoForecast.icon}.png`, dayTwoForecast.temp, dayTwoForecast.humi)
+
+    dayThree(dayThreeForecast.dateThree, `https://openweathermap.org/img/wn/${dayThreeForecast.icon}.png`, dayThreeForecast.temp, dayThreeForecast.humi)
+
+    dayFour(dayFourForecast.dateFour, `https://openweathermap.org/img/wn/${dayFourForecast.icon}.png`, dayFourForecast.temp, dayFourForecast.humi)
+
+    dayFive(dayFiveForecast.dateFive, `https://openweathermap.org/img/wn/${dayFiveForecast.icon}.png`, dayFiveForecast.temp, dayFiveForecast.humi)
+
+}
+
+
+function showCurrentWeather(temp, hum, wind, uv, icon) {
+
+    var dateNow = moment().format('MMMM Do YYYY');
+    document.querySelector('#dateNow').innerHTML = dateNow;
+
+    //document.querySelector('#cityName').innerHTML = userCity;
+    document.querySelector('#temperature').innerHTML = temp
+    document.querySelector('#humidity').innerHTML = hum
+    document.querySelector('#windSpeed').innerHTML = wind
+    document.querySelector('#UVIndex').innerHTML = uv
+    document.querySelector('#icon').src = `https://openweathermap.org/img/wn/${icon}.png`
+
+}
+
+
+function dayOne(dateDayOne, icon, temp, humi) {
+    document.querySelector('#dateOne').innerHTML = dateDayOne;
+    document.querySelector('#iconOne').src = icon;
+    document.querySelector('#tempOne').innerHTML = temp;
+    document.querySelector('#humiOne').innerHTML = humi;
+}
+
+function dayTwo(dateDayTwo, icon, temp, humi) {
+    document.querySelector('#dateTwo').innerHTML = dateDayTwo;
+    document.querySelector('#iconTwo').src = icon;
+    document.querySelector('#tempTwo').innerHTML = temp;
+    document.querySelector('#humiTwo').innerHTML = humi;
+}
+
+function dayThree(dateDayThree, icon, temp, humi) {
+    document.querySelector('#dateThree').innerHTML = dateDayThree;
+    document.querySelector('#iconThree').src = icon;
+    document.querySelector('#tempThree').innerHTML = temp;
+    document.querySelector('#humiThree').innerHTML = humi;
+}
+
+function dayFour(dateDayFour, icon, temp, humi) {
+    document.querySelector('#dateFour').innerHTML = dateDayFour;
+    document.querySelector('#iconFour').src = icon;
+    document.querySelector('#tempFour').innerHTML = temp;
+    document.querySelector('#humiFour').innerHTML = humi;
+}
+
+function dayFive(dateDayFive, icon, temp, humi) {
+    document.querySelector('#dateFive').innerHTML = dateDayFive;
+    document.querySelector('#iconFive').src = icon;
+    document.querySelector('#tempFive').innerHTML = temp;
+    document.querySelector('#humiFive').innerHTML = humi;
 }
