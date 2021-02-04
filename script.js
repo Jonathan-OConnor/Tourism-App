@@ -62,7 +62,7 @@ function buildCityPage(cityObject) {
     // getCurrency(cityInformation.countryCode)
 
     // build interesting places
-    // getPlaces(cityInformation.name, cityInformation.countryCode, cityInformation.lat, cityInformation.long)
+    getPlaces( cityObject.long, cityObject.lat)
 
     // navigate to city page
     showCityPage()
@@ -375,3 +375,20 @@ function buildMap(lat, lng) {
     });
 }
 
+async function getPlaces( lon, lat ){
+    document.querySelector('#touristSites').innerHTML = ""
+     popularURL = `https://api.opentripmap.com/0.1/en/places/radius?apikey=5ae2e3f221c38a28845f05b6e8aa796e24785137e8a2f08be2186c12&radius=1000&lon=${lon}&lat=${lat}&rate=3h`
+    popularData = await fetch( popularURL ).then( r=>r.json() )
+    var popularLocations = 5
+    for( var i=0; i<popularLocations; i++ ){
+        var locationName = popularData.features[i].properties.name
+        var wikiData = popularData.features[i].properties.wikidata
+        document.querySelector('#touristSites').innerHTML += `
+        <ul class="list-group">
+            <li class="list-group-item">${locationName}</li>
+            <a class="list-group-item" href="http://www.wikidata.org/entity/${wikiData}">http://www.wikidata.org/entity/${wikiData}</a>
+        </ul>
+        `
+    }
+
+}
