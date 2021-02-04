@@ -2,7 +2,6 @@ var userCity
 
 async function search(event) {
     event.preventDefault()
-    // 
     // prevent search if nothing has been typed.
     if (document.getElementById("userCity").value !== "") {
         var resultList
@@ -10,53 +9,66 @@ async function search(event) {
         await cityNames(document.getElementById("userCity").value).then(r => resultList = r)
         // hide other pages
         document.getElementById("results").innerHTML = ""
+        document.getElementById("userCity").value = ""
         showSearchPage()
-
-        // FUNCTION THAT MAKES SEARCH RESULTS PAGE
-        for (var i = 0; i < resultList.length; i++) {
-            var bodyText = `${resultList[i].name} - ${resultList[i].countryName}`
-            var backgroundImage = resultList[i].image
-
-            var column = document.createElement("div")
-            column.setAttribute("class", " col-12-xsm col-sm-6 col-lg-4")
-
-            var card = document.createElement("div")
-            card.setAttribute("style", `position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url("${backgroundImage}"); background-position: center; background-size: cover; margin-top: 20px;`)
-
-            var cardBody = document.createElement("div")
-            cardBody.setAttribute("class", "card-body")
-            cardBody.setAttribute("style", "margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);")
-
-            var text = document.createElement("button")
-            text.setAttribute("class", "btn btn-primary")
-            var test = JSON.stringify(resultList[i])
-            text.setAttribute("onClick", `buildCityPage(${test})`)
-            text.innerText = bodyText
-
-            column.appendChild(card)
-            card.appendChild(cardBody)
-            cardBody.appendChild(text)
-            document.getElementById("results").appendChild(column)
-        }
-        // 
-        console.log(resultList)
+    } else if (document.getElementById("navbarSearch").value !== "") {
+        var resultList
+        // get search results for the user
+        await cityNames(document.getElementById("navbarSearch").value).then(r => resultList = r)
+        // hide other pages
+        document.getElementById("results").innerHTML = ""
+        document.getElementById("navbarSearch").value = ""
+        showSearchPage()
     }
+
+    // FUNCTION THAT MAKES SEARCH RESULTS PAGE
+    for (var i = 0; i < resultList.length; i++) {
+        var bodyText = `${resultList[i].name} - ${resultList[i].countryName}`
+        var backgroundImage = resultList[i].image
+
+        var column = document.createElement("div")
+        column.setAttribute("class", " col-12-xsm col-sm-6 col-lg-4")
+
+        var card = document.createElement("div")
+        card.setAttribute("style", `position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url("${backgroundImage}"); background-position: center; background-size: cover; margin-top: 20px;`)
+
+        var cardBody = document.createElement("div")
+        cardBody.setAttribute("class", "card-body")
+        cardBody.setAttribute("style", "margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);")
+
+        var text = document.createElement("button")
+        text.setAttribute("class", "btn btn-primary")
+        var test = JSON.stringify(resultList[i])
+        text.setAttribute("onClick", `buildCityPage(${test})`)
+        text.innerText = bodyText
+
+        column.appendChild(card)
+        card.appendChild(cardBody)
+        cardBody.appendChild(text)
+        document.getElementById("results").appendChild(column)
+    }
+    // 
+    console.log(resultList)
 }
 
 function buildCityPage(cityObject) {
- 
+
+
 
     // build weather
     makeWeather(cityObject.name, cityObject.countryCode)
+
     // build currency
     // getCurrency(cityInformation.countryCode)
+
     // build interesting places
     // getPlaces(cityInformation.name, cityInformation.countryCode, cityInformation.lat, cityInformation.long)
-    // build map
-    // buildMap(cityInformation.lat, cityInformation.long)
+
     // navigate to city page
     showCityPage()
 
+    // build map
+    buildMap(cityObject.lat, cityObject.long)
 }
 
 async function cityNames(userCity) {
@@ -105,6 +117,7 @@ function showHomePage() {
     document.querySelector('#favourites').classList.add('d-none')
     document.querySelector('#search-results').classList.add('d-none')
     document.querySelector('#city-information').classList.add('d-none')
+    document.querySelector('#not-homepage').classList.add('d-none')
     console.log('clicked ')
 }
 
@@ -114,6 +127,7 @@ function showSearchPage() {
     document.querySelector('#favourites').classList.add('d-none')
     document.querySelector('#search-results').classList.remove('d-none')
     document.querySelector('#city-information').classList.add('d-none')
+    document.querySelector('#not-homepage').classList.remove('d-none')
     console.log('clicked ')
 }
 
@@ -123,6 +137,7 @@ function showFavouritesPage() {
     document.querySelector('#favourites').classList.remove('d-none')
     document.querySelector('#search-results').classList.add('d-none')
     document.querySelector('#city-information').classList.add('d-none')
+    document.querySelector('#not-homepage').classList.remove('d-none')
     console.log('clicked ')
 }
 
@@ -131,6 +146,7 @@ function showCityPage() {
     document.querySelector('#favourites').classList.add('d-none')
     document.querySelector('#search-results').classList.add('d-none')
     document.querySelector('#city-information').classList.remove('d-none')
+    document.querySelector('#not-homepage').classList.remove('d-none')
     console.log('clicked ')
 }
 
@@ -280,3 +296,82 @@ function dayFive(dateDayFive, icon, temp, humi) {
     document.querySelector('#tempFive').innerHTML = temp;
     document.querySelector('#humiFive').innerHTML = humi;
 }
+
+
+//  function to make map
+function buildMap(lat, lng) {
+    //clear previous map
+    document.getElementById("mapContainer").innerHTML = ""
+
+    // build new map element
+    var mapDiv = document.createElement("div")
+    mapDiv.setAttribute("class", 'container col w-100')
+    mapDiv.id = 'map'
+    mapDiv.setAttribute("style", 'width: 1000px; height: 300px;')
+
+    // append new map element to the map container
+    document.getElementById("mapContainer").appendChild(mapDiv)
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWxleGdvbGRtYW45OCIsImEiOiJja2tvY21tODIwZnhhMm9udjRvZmpieWtuIn0.TexdX_a_a6lxPC5SGJAIaA';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+        center: [lng, lat], // starting position [lng, lat]
+        pitch: 60,
+        bearing: -60,
+        zoom: 10, // starting zoom
+        antialias: true,
+        //["heatmap-density"]: .1,
+    });
+
+    map.on('load', function () {
+        // Insert the layer beneath any symbol layer.
+        var layers = map.getStyle().layers;
+
+        var labelLayerId;
+        for (var i = 0; i < layers.length; i++) {
+            if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+                labelLayerId = layers[i].id;
+                break;
+            }
+        }
+
+        map.addLayer(
+            {
+                'id': '3d-buildings',
+                'source': 'composite',
+                'source-layer': 'building',
+                'filter': ['==', 'extrude', 'true'],
+                'type': 'fill-extrusion',
+                'minzoom': 15,
+                'paint': {
+                    'fill-extrusion-color': '#aaa',
+
+                    // use an 'interpolate' expression to add a smooth transition effect to the
+                    // buildings as the user zooms in
+                    'fill-extrusion-height': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        15,
+                        0,
+                        15.05,
+                        ['get', 'height']
+                    ],
+                    'fill-extrusion-base': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        15,
+                        0,
+                        15.05,
+                        ['get', 'min_height']
+                    ],
+                    'fill-extrusion-opacity': 0.6
+                }
+            },
+            labelLayerId
+        );
+    });
+}
+
