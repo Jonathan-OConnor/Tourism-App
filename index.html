@@ -73,7 +73,7 @@
                     <!--Bali image address: https://media.timeout.com/images/105240189/image.jpg-->
                     <div class="card-body"
                         style=" margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                        <button href="#" class="btn btn-primary" type="button">Bali - Indonesia</button>
+                        <button id="Bali-Button" class="btn btn-primary" type="button">Bali - Indonesia</button>
                     </div>
                 </div>
                 <!--end of second card-->
@@ -82,7 +82,7 @@
                     <!--Paris image address: https://media.tacdn.com/media/attractions-splice-spp-674x446/07/03/1c/9c.jpg-->
                     <div class="card-body"
                         style=" margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                        <button href="#" class="btn btn-primary" type="button">Paris - France</button>
+                        <button id="Paris-Button" class="btn btn-primary" type="button">Paris - France</button>
                     </div>
                 </div>
                 <!--end of second card-->
@@ -91,7 +91,7 @@
                     <!--Mykonos image address: https://blog.travala.com/wp-content/uploads/2020/03/Mykonos.jpg-->
                     <div class="card-body"
                         style=" margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                        <button href="#" class="btn btn-primary" type="button">Mykonos - Greece</button>
+                        <button id="Mykonos-Button" class="btn btn-primary" type="button">Mykonos - Greece</button>
                     </div>
                 </div>
                 <!--end of third card-->
@@ -106,13 +106,13 @@
                         src="Assets/icon.png" style="position: fixed; top: 5px; left: 5px;" width="40px"
                         height="40px"></button>
                 <div class="d-flex justify-content-center ">
-                    <form onSubmit="search(event)" id="navbarSearchForm" class="d-flex justify-content-center "> 
-                        <input  id="navbarSearch" class="form-control" type="text" placeholder="Enter your destination">
-                        <button id="btnSearch" type="submit" class="d-none d-md-block  btn bg-transparent" form="navbarSearchForm"
-                        style="color: white">Search</button>
+                    <form onSubmit="search(event)" id="navbarSearchForm" class="d-flex justify-content-center ">
+                        <input id="navbarSearch" class="form-control" type="text" placeholder="Enter your destination">
+                        <button id="btnSearch" type="submit" class="d-none d-md-block  btn bg-transparent"
+                            form="navbarSearchForm" style="color: white">Search</button>
                     </form>
 
-            
+
                 </div>
                 <form class="d-flex justify-content-center">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -134,11 +134,13 @@
         <div id="search-results" class="d-none">
             <div>
                 <div class="container">
-                    <h3>Search Results:</h3>
+                    <h3 style="margin-top: 20px;">Search Results:</h3>
+                    <p id="searchErrorMessage" class="d-none center">Sorry, we couldn't find anything matching that
+                        search :( </p>
                     <div class="row" id='results'>
 
                     </div>
-                    <h3>Recommended Places:</h3>
+                    <h3 style="margin-top: 20px;">Recommended Places:</h3>
                 </div>
             </div>
         </div>
@@ -217,15 +219,17 @@
                 <!--end of weather main row-->
             </div>
             <!--end of weather container-->
+            <!-- Popular Destinations API -->
+            <div class="container">
+                <h3>Popular Destinations</h3>
+                <div id="touristSites">
+                </div>
+            </div>
             <!-- Map API-->
             <div id="mapContainer">
             </div>
-             <!-- Popular Destinations API -->
-             <div class = "container">
-                <h3>Popular Destinations</h3>
-                <div id="touristSites">
-            </div>
-            </div>
+
+
         </div>
     </div>
     <script src="script.js"></script>

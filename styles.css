@@ -1,3 +1,6 @@
+body{
+  background-color:  #e8e8e8;
+}
 #hero {
   background-image: url("Assets/heroImageSwitzerland.jpg");
   background-position: center;
@@ -65,5 +68,14 @@
 
 #btnSearch:hover {
   font-weight: bold;
+}
+
+.searchResultCardBody{
+  margin: 0; 
+  top: 50%; 
+  left: 50%; 
+  position: absolute; 
+  -ms-transform: translate(-50%,-50%);
+   transform: translate(-50%, -50%);
 }
 

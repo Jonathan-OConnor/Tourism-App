@@ -18,23 +18,25 @@ async function search(event) {
         // hide other pages
         document.getElementById("results").innerHTML = ""
         document.getElementById("navbarSearch").value = ""
+        document.getElementById("searchErrorMessage").classList.add("d-none")
         showSearchPage()
     }
-
+    var resultCount = 0
     // FUNCTION THAT MAKES SEARCH RESULTS PAGE
     for (var i = 0; i < resultList.length; i++) {
+        resultCount += 1
         var bodyText = `${resultList[i].name} - ${resultList[i].countryName}`
         var backgroundImage = resultList[i].image
 
         var column = document.createElement("div")
-        column.setAttribute("class", " col-12-xsm col-sm-6 col-lg-4")
+        column.setAttribute("class", "col-12-xsm col-sm-6 col-lg-4")
 
         var card = document.createElement("div")
+        card.setAttribute("class", "card")
         card.setAttribute("style", `position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url("${backgroundImage}"); background-position: center; background-size: cover; margin-top: 20px;`)
 
         var cardBody = document.createElement("div")
-        cardBody.setAttribute("class", "card-body")
-        cardBody.setAttribute("style", "margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);")
+        cardBody.setAttribute("class", "card-body searchResultCardBody")
 
         var text = document.createElement("button")
         text.setAttribute("class", "btn btn-primary")
@@ -47,13 +49,29 @@ async function search(event) {
         cardBody.appendChild(text)
         document.getElementById("results").appendChild(column)
     }
-    // 
-    console.log(resultList)
+
+    // for (var i = 0; i < 10; i++){
+    //     document.getElementById(`recommended${i}`).classList.add("d-none")}
+
+    // if (resultCount==0){
+    //     document.getElementById("searchErrorMessage").classList.remove("d-none")
+    // }
+
+    // if (resultCount > 6){
+    //     var i = 7
+   
+    // } else if (resultCount > 3) {
+    //     var i = 4
+    // } else {
+    //     var i = 1
+    // }
+    // for (i; i < 10; i++){
+    //     document.getElementById(`recommended${i}`).classList.remove("d-none")
+    // }
+   
 }
 
 function buildCityPage(cityObject) {
-
-
 
     // build weather
     makeWeather(cityObject.name, cityObject.countryCode)
@@ -63,6 +81,8 @@ function buildCityPage(cityObject) {
 
     // build interesting places
     getPlaces( cityObject.long, cityObject.lat)
+
+    // build favourite button
 
     // navigate to city page
     showCityPage()
@@ -297,6 +317,7 @@ function dayFive(dateDayFive, icon, temp, humi) {
     document.querySelector('#humiFive').innerHTML = humi;
 }
 
+// function to build favourite button
 
 //  function to make map
 function buildMap(lat, lng) {
@@ -391,4 +412,24 @@ async function getPlaces( lon, lat ){
         `
     }
 
+}
+// hardcode functionality to homepage buttons
+var Bali = {countryCode: "ID", countryName: "Indonesia", image: "https://d13k13wj6adfdf.cloudfront.net/urban_areas/bali-934e688d1a.jpg", lat: "-8.65", long:"115.21667", name:"Bali", nearestCity: "https://api.teleport.org/api/urban_areas/slug:bali/"}
+var Paris = {countryCode: "FR", countryName: "France", image: "https://d13k13wj6adfdf.cloudfront.net/urban_areas/paris-0ae0bb626e.jpg", lat: "48.85341", long:"2.3488", name:"Paris", nearestCity: "https://api.teleport.org/api/urban_areas/slug:paris/"}
+var Mykonos = {countryCode: "GR", countryName: "Greece", image: "Assets/Mykonos.jpg", lat: "37.4467", long:"25.3289", name:"Mykonos", nearestCity: "https://api.teleport.org/api/urban_areas/slug:athens/"}
+
+document.getElementById("Bali-Button").addEventListener("click", buildBali)
+document.getElementById("Paris-Button").addEventListener("click", buildParis)
+document.getElementById("Mykonos-Button").addEventListener("click", buildMykonos)
+
+function buildBali(){
+    buildCityPage(Bali)
+}
+
+function buildParis() {
+    buildCityPage(Paris)
+}
+
+function buildMykonos(){
+    buildCityPage(Mykonos)
 }
