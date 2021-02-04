@@ -75,7 +75,7 @@ async function cityNames(userCity) {
     var list = []
 
     // get at most 9 cities which roughly match the name searched
-    var apiData = await fetch(`http://api.geonames.org/searchJSON?name=${userCity}&fuzzy=0.8&cities=cities5000&maxRows=9&username=JonathanO`).then(r => r.json())
+    var apiData = await fetch(`https://api.geonames.org/searchJSON?name=${userCity}&fuzzy=0.8&cities=cities5000&maxRows=9&username=JonathanO`).then(r => r.json())
     var resultData = apiData.geonames
 
     // store the important information about a city as an object. Put this object into a list
@@ -155,7 +155,7 @@ function showCityPage() {
 async function makeWeather(city, stateCode) {
 
 
-    var cityApi = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)},${stateCode}&appid=c18d1c67b725426cb4da6690f0f0a919`).then(r => r.json())
+    var cityApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)},${stateCode}&appid=c18d1c67b725426cb4da6690f0f0a919`).then(r => r.json())
     var cityLon = cityApi.coord.lon;
     var cityLat = cityApi.coord.lat;
 
@@ -377,7 +377,7 @@ function buildMap(lat, lng) {
 
 async function getPlaces( lon, lat ){
     document.querySelector('#touristSites').innerHTML = ""
-     popularURL = `https://api.opentripmap.com/0.1/en/places/radius?apikey=5ae2e3f221c38a28845f05b6e8aa796e24785137e8a2f08be2186c12&radius=1000&lon=${lon}&lat=${lat}&rate=3h`
+     popularURL = `https://api.opentripmap.com/0.1/en/places/radius?apikey=5ae2e3f221c38a28845f05b6e8aa796e24785137e8a2f08be2186c12&radius=100000&lon=${lon}&lat=${lat}&rate=3h`
     popularData = await fetch( popularURL ).then( r=>r.json() )
     var popularLocations = 5
     for( var i=0; i<popularLocations; i++ ){
@@ -386,7 +386,7 @@ async function getPlaces( lon, lat ){
         document.querySelector('#touristSites').innerHTML += `
         <ul class="list-group">
             <li class="list-group-item">${locationName}</li>
-            <a class="list-group-item" href="http://www.wikidata.org/entity/${wikiData}">http://www.wikidata.org/entity/${wikiData}</a>
+            <a class="list-group-item" href="https://www.wikidata.org/entity/${wikiData}">https://www.wikidata.org/entity/${wikiData}</a>
         </ul>
         `
     }
