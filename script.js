@@ -77,7 +77,7 @@ async function cityNames(userCity) {
     var list = []
 
     // get at most 9 cities which roughly match the name searched
-    var apiData = await fetch(`http://api.geonames.org/searchJSON?name=${userCity}&fuzzy=0.8&cities=cities5000&maxRows=9&username=JonathanO`).then(r => r.json())
+    var apiData = await fetch(`https://secure.geonames.org/searchJSON?name=${userCity}&fuzzy=0.8&cities=cities5000&maxRows=9&username=JonathanO`).then(r => r.json())
     var resultData = apiData.geonames
 
     // store the important information about a city as an object. Put this object into a list
@@ -157,7 +157,7 @@ function showCityPage() {
 async function makeWeather(city, stateCode) {
 
 
-    var cityApi = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)},${stateCode}&appid=c18d1c67b725426cb4da6690f0f0a919`).then(r => r.json())
+    var cityApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)},${stateCode}&appid=c18d1c67b725426cb4da6690f0f0a919`).then(r => r.json())
     var cityLon = cityApi.coord.lon;
     var cityLat = cityApi.coord.lat;
 
@@ -447,7 +447,7 @@ function checkIfFav() {
 
 function buildFavs() {
     document.getElementById("favouritesCards").innerHTML = ''
-    
+
     if (favList.length == 0) {
         var errorMsg = document.createElement("p")
         errorMsg.innerText = "Sorry, it doesn't look like you have any favourites :("
