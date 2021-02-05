@@ -75,7 +75,7 @@ async function cityNames(userCity) {
     var list = []
 
     // get at most 9 cities which roughly match the name searched
-    var apiData = await fetch(`https://api.geonames.org/searchJSON?name=${userCity}&fuzzy=0.8&cities=cities5000&maxRows=9&username=JonathanO`).then(r => r.json())
+    var apiData = await fetch(`https://secure.geonames.org/searchJSON?name=${userCity}&fuzzy=0.8&cities=cities5000&maxRows=9&username=JonathanO`).then(r => r.json())
     var resultData = apiData.geonames
 
     // store the important information about a city as an object. Put this object into a list
