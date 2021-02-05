@@ -250,19 +250,19 @@
                 </div>
             </div>
         </div>
-        <div id="city-information" class="d-none">
+        <div id="city-information" class="d-none" >
             <!-- favourites button-->
-            <div class='d-flex justify-items-right'>
-                <button id="favouritesButton" class="far fa-star" onclick='favouritedButton()'>
+            <div class='container d-flex justify-items-center' >
+                <button id="favouritesButton" class="far fa-star " style="background-color: white; font-size: x-large; color: #0C6EFD; margin: 10px; border: white; outline: none;" onclick='favouritedButton()'>
                     Favourites
                 </button>
             </div>
-            <div id="weatherContainer" class="container" style="margin-bottom: 15px;">
+            <div id="weatherContainer" class="container" style="margin-bottom: 15px; ">
                 <!-- weather information for a city starts here-->
                 <div class="row">
-                    <div id="cardCurrentWeather" class="card col-12 col-lg-4 col-xl-4"
+                    <div id="cardCurrentWeather" class="card col-12 col-lg-4 col-xl-4; border-0"
                         >
-                        <h3 style="background-color: #0C6EFD; text-align: center; color: white; margin-top: 10px;">
+                        <h3 style="background-color: white; text-align: center; color: #0C6EFD; margin-top: 10px;">
                             Current
                             weather:</h3>
                         <div class="card-body">
@@ -274,15 +274,15 @@
                         </div>
                     </div>
                     <!--end of current weather card-->
-                    <div id="cardForecastWeather" class="card col-12 col-lg-8 col-xl-8"
+                    <div id="cardForecastWeather" class="card col-12 col-lg-8 col-xl-8; border-0"
                         >
-                        <h3 style="background-color: #0C6EFD; text-align: center; color: white; margin-top: 10px;">5
+                        <h3 style="background-color: white; text-align: center; color: #3078C6; margin-top: 10px;">5
                             Days
                             Forecast:</h3>
                         <div class="card-body row">
                             <!-- day one forecast card starts here-->
                             <div class="card" class="col"
-                                style="width: 9rem; margin-right: 12px; background-color:#017BFE; color: white; margin-top: 10px;">
+                                style="width: 9rem; margin-right: 12px; background-color:#3078C6; color: white; margin-top: 10px;">
                                 <p id="dateOne"><strong></strong></p>
                                 <img id="iconOne" width="50px" height="50px">
                                 <p>Temp: <span id="tempOne"></span> &#8457;</p>
@@ -290,7 +290,7 @@
                             </div>
                             <!--end of card one-->
                             <div class="card" class="col"
-                                style="width: 9rem; margin-right: 12px; background-color:#017BFE; color: white; margin-top: 10px;">
+                                style="width: 9rem; margin-right: 12px; background-color:#3078C6; color: white; margin-top: 10px;">
                                 <p id="dateTwo"><strong></strong></p>
                                 <img id="iconTwo" width="50px" height="50px">
                                 <p>Temp: <span id="tempTwo"></span> &#8457;</p>
@@ -298,7 +298,7 @@
                             </div>
                             <!--end of card two-->
                             <div class="card" class="col"
-                                style="width: 9rem; margin-right: 12px; background-color:#017BFE; color: white; margin-top: 10px;">
+                                style="width: 9rem; margin-right: 12px; background-color:#3078C6; color: white; margin-top: 10px;">
                                 <p id="dateThree"><strong></strong></p>
                                 <img id="iconThree" width="50px" height="50px">
                                 <p>Temp: <span id="tempThree"></span> &#8457;</p>
@@ -306,7 +306,7 @@
                             </div>
                             <!--end of card three-->
                             <div class="card" class="col"
-                                style="width: 9rem; margin-right: 12px; background-color:#017BFE; color: white; margin-top: 10px;">
+                                style="width: 9rem; margin-right: 12px; background-color: #3078C6; color: white; margin-top: 10px;">
                                 <p id="dateFour"><strong></strong></p>
                                 <img id="iconFour" width="50px" height="50px">
                                 <p>Temp: <span id="tempFour"></span> &#8457;</p>
@@ -314,7 +314,7 @@
                             </div>
                             <!--end of card four-->
                             <div class="card" class="col"
-                                style="width: 9rem; margin-right: 12px; background-color:#017BFE; color: white; margin-top: 10px;">
+                                style="width: 9rem; margin-right: 12px; background-color: #3078C6; color: white; margin-top: 10px;">
                                 <p id="dateFive"><strong></strong></p>
                                 <img id="iconFive" width="50px" height="50px">
                                 <p>Temp: <span id="tempFive"></span> &#8457;</p>
@@ -332,8 +332,8 @@
             <!-- currency html code starts below-->
             <div class="container" style="margin-bottom: 15px;">
                 <div class="row">
-                    <div id="cardCurrency" class="card col-12 col-lg-4 col-xl-4" >
-                        <h3 style="background-color: #0C6EFD; text-align: center; color: white; margin-top: 10px;">
+                    <div id="cardCurrency" class="card col-12 col-lg-4 col-xl-4; border-0" >
+                        <h3 style="background-color: white; text-align: center; color: #0C6EFD; margin-top: 10px;">
                             Currency</h3>
                         <div class="card-body">
                             <div class="row">
@@ -360,8 +360,8 @@
                         <p>UV Index: <span id="UVIndex" style=" color: white;"></span></p> -->
                         </div>
                     </div> <!-- currency card ends here-->
-                    <div class="card col-12 col-lg-8 col-xl-8">
-                        <h3 style="background-color: #0C6EFD; text-align: center; color: white; margin-top: 10px;">
+                    <div class="card col-12 col-lg-8 col-xl-8; border-0">
+                        <h3 style="background-color: white; text-align: center; color: #0C6EFD; margin-top: 10px;">
                             Popular Destination</h3>
                         <div class="card-body">
                             <div id="touristSites">
