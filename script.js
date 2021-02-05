@@ -20,7 +20,6 @@ async function search(event) {
         document.getElementById("navbarSearch").value = ""
         showSearchPage()
     }
-
     // FUNCTION THAT MAKES SEARCH RESULTS PAGE
     for (var i = 0; i < resultList.length; i++) {
         var bodyText = `${resultList[i].name} - ${resultList[i].countryName}`
@@ -50,8 +49,27 @@ async function search(event) {
         cardBody.appendChild(text)
         document.getElementById("results").appendChild(column)
     }
-    // 
-    console.log(resultList)
+    if (resultList.length == 0){
+        var error = document.createElement("p")
+        error.innerText= "Sorry, that search did not match a city we could find"
+        document.getElementById("results").appendChild(error)
+    }
+
+    // display amount of recommendatinos based on number of search results
+    for (var i = 1; i <= 9; i++){
+        document.getElementById(`rec${i}`).classList.add("d-none")
+    } 
+    var resultCount = resultList.length
+    var totalRecommended = 9
+    if (resultCount > 6) {
+        totalRecommended = 3
+    } else if (resultCount > 3) {
+        totalRecommended = 6
+    }
+    for (var i = 1; i <= totalRecommended; i++){
+        document.getElementById(`rec${i}`).classList.remove("d-none")
+    } 
+
 }
 
 function buildCityPage(cityObject) {

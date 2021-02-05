@@ -18,15 +18,12 @@
     <link rel="stylesheet" href="styles.css">
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css' rel='stylesheet' />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link rel="icon" href="Assets/mainLogo.png">
     <!-- font awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <title>Tourism</title>
 </head>
 
@@ -48,7 +45,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav" dir="rtl">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a id="btnFavourite" class="nav-link active coloredbutton" aria-current="page" 
+                                <a id="btnFavourite" class="nav-link active coloredbutton" aria-current="page"
                                     style="color: #3078C6; font-weight: bold;">Favourites</a>
                             </li>
                         </ul>
@@ -56,26 +53,29 @@
                 </div>
             </nav>
 
-            
+
             <!--end of navbar-->
             <!-- <a href="#"><img id="logo" src="Assets/icon.png" style="position: fixed; top: 5px; left: 5px;" width="50px" height="50px"></a> -->
             <h3
                 style=" color: black;  margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
                 “Once a year, go someplace you’ve never been before”
             </h3>
-            <div style="top: 80%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
+            <div
+                style="top: 80%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
                 <form onSubmit="search(event)" id="searchForm" class="row">
-                    <input id="userCity" type="text" class="form-control col-8 col-lg-7 col-xl-7" placeholder="Enter your destination"
-                        style="width: auto; display: inline; ">
-                    <!-- <input style="width: 300px;"> --> 
-                    <button type="submit" class="btn btn-primary col-2 col-lg-2 col-xl-2 fas fa-search" style="background-color: #3078C6;" form="searchForm"> </button>
+                    <input id="userCity" type="text" class="form-control col-8 col-lg-7 col-xl-7"
+                        placeholder="Enter your destination" style="width: auto; display: inline; ">
+                    <!-- <input style="width: 300px;"> -->
+                    <button type="submit" class="btn btn-primary col-2 col-lg-2 col-xl-2 fas fa-search"
+                        style="background-color: #3078C6;" form="searchForm"> </button>
                 </form>
             </div>
             <!--end of search input and button container-->
         </div>
         <!--end of hero container-->
         <br />
-        <p style="text-align: center; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size:1.5em;">The most visited cities in the world</p>
+        <p style="text-align: center; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size:1.5em;">
+            The most visited cities in the world</p>
         <br>
         <div id="cardContainer" class="container">
             <div class="row">
@@ -85,7 +85,8 @@
                     <!--Bali image address: https://media.timeout.com/images/105240189/image.jpg-->
                     <div class="card-body"
                         style=" margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                        <button href="#" class="btn btn-primary" type="button" style="background-color: #3078C6;">Bali - Indonesia</button>
+                        <button id="Bali-button" href="#" class="btn btn-primary" type="button"
+                            style="background-color: #3078C6;">Bali - Indonesia</button>
                     </div>
                 </div>
                 <!--end of second card-->
@@ -94,7 +95,8 @@
                     <!--Paris image address: https://media.tacdn.com/media/attractions-splice-spp-674x446/07/03/1c/9c.jpg-->
                     <div class="card-body"
                         style=" margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                        <button href="#" class="btn btn-primary" type="button" style="background-color: #3078C6;">Paris - France</button>
+                        <button id="Paris-button" href="#" class="btn btn-primary" type="button"
+                            style="background-color: #3078C6;">Paris - France</button>
                     </div>
                 </div>
                 <!--end of second card-->
@@ -103,7 +105,8 @@
                     <!--Mykonos image address: https://blog.travala.com/wp-content/uploads/2020/03/Mykonos.jpg-->
                     <div class="card-body"
                         style=" margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                        <button href="#" class="btn btn-primary" type="button" style="background-color: #3078C6;">Mykonos - Greece</button>
+                        <button id="Mykonos-button" href="#" class="btn btn-primary" type="button"
+                            style="background-color: #3078C6;">Mykonos - Greece</button>
                     </div>
                 </div>
                 <!--end of third card-->
@@ -148,97 +151,115 @@
             <div>
                 <div class="container">
                     <h3 style="color: #3078C6;">Search Results</h3>
-                    <div class="container" style="border-bottom: 1px solid grey; margin-top: 15px; margin-top: 15px; margin-bottom: 15px;"> 
+                    <div class="container"
+                        style="border-bottom: 1px solid grey; margin-top: 15px; margin-top: 15px; margin-bottom: 15px;">
                     </div><!-- container just to show line between two assignments!-->
                     <div class="row" id='results'>
+                        
+                    </div>
+                    <h3 style="color: #3078C6; margin-top: 20px;">Recommended Places</h3>
+                    <div class="container"
+                        style="border-bottom: 1px solid grey; margin-top: 15px; margin-top: 10px; margin-bottom: 10px;">
 
                     </div>
-                    
-                    
+                    <div class="row">
+                        <div id="rec1" class="col-12-xsm col-sm-6 col-lg-4">
+                            <div class="card"
+                                style="position: relative; margin-top: 20px; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Cairo.png); background-position: center; background-size: cover">
+                                <div class="card-body"
+                                    style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
+                                    <button id="Cairo-button" class="btn btn-primary">Cario - Egypt</button>
+                                </div>
+                            </div>
+                        </div>
 
-                    <h3 style="color: #3078C6; margin-top: 20px;">Recommended Places</h3>
-                    <div class="container" style="border-bottom: 1px solid grey; margin-top: 15px; margin-top: 10px; margin-bottom: 10px;"> 
-                        <div class="row">
+                        <div id="rec2" class="col-12-xsm col-sm-6 col-lg-4">
+                            <div class="card"
+                                style="position: relative; margin-top: 20px; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Auckland.jpg); background-position: center; background-size: cover">
+                                <div class="card-body"
+                                    style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
+                                    <button id="Auckland-button" class="btn btn-primary">Auckland - New Zealand</button>
+                                </div>
+                            </div>
+                        </div>
 
-                            <div id="Cario" class="col-12-xsm col-sm-6 col-lg-4">
-                                <div class="card" style="position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Cairo.png); background-position: center; background-size: cover">
-                                    <div class="card-body" style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                                      <button class="btn btn-primary">Cario - Egypt</button>
-                                    </div>
-                                  </div>  
+                        <div id="rec3" class="col-12-xsm col-sm-6 col-lg-4">
+                            <div class="card"
+                                style="position: relative; margin-top: 20px; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Tokyo.jpg); background-position: center; background-size: cover">
+                                <div class="card-body"
+                                    style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
+                                    <button id="Tokyo-button" class="btn btn-primary">Tokyo - Japan</button>
+                                </div>
                             </div>
-        
-                            <div id="Auckland" class="col-12-xsm col-sm-6 col-lg-4">
-                                <div class="card" style="position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Auckland.jpg); background-position: center; background-size: cover">
-                                    <div class="card-body" style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                                      <button class="btn btn-primary">Auckland - New Zealand</button>
-                                    </div>
-                                  </div>  
-                            </div>
-        
-                            <div id="Tokyo" class="col-12-xsm col-sm-6 col-lg-4">
-                                <div class="card" style="position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Tokyo.jpg); background-position: center; background-size: cover">
-                                    <div class="card-body" style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                                      <button class="btn btn-primary">Tokyo - Japan</button>
-                                    </div>
-                                  </div>  
-                            </div>
-        
-                            <div id="Bora-bora" class="col-12-xsm col-sm-6 col-lg-4">
-                                <div class="card" style="position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/bora-bora.jpg); background-position: center; background-size: cover">
-                                    <div class="card-body" style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                                      <button class="btn btn-primary">Bora-Bora - French Polynesia</button>
-                                    </div>
-                                  </div>  
-                            </div>
-        
-                            <div id="Venice" class="col-12-xsm col-sm-6 col-lg-4">
-                                <div class="card" style="position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Venice.jpg); background-position: center; background-size: cover">
-                                    <div class="card-body" style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                                      <button class="btn btn-primary">Venice - Italy</button>
-                                    </div>
-                                  </div>  
-                            </div>
-        
-                            <div id="Honolulu" class="col-12-xsm col-sm-6 col-lg-4">
-                                <div class="card" style="position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Honolulu.jpg); background-position: center; background-size: cover">
-                                    <div class="card-body" style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                                      <button class="btn btn-primary">Honolulu - Hawaii</button>
-                                    </div>
-                                  </div>  
-                            </div>
-        
-                            <div id="Freiburg" class="col-12-xsm col-sm-6 col-lg-4">
-                                <div class="card" style="position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Freiburg.jpg); background-position: center; background-size: cover">
-                                    <div class="card-body" style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                                      <button class="btn btn-primary">Freiburg im Breisgau - Germany</button>
-                                    </div>
-                                  </div>  
-                            </div>
-        
-                            <div id="Melbourne" class="col-12-xsm col-sm-6 col-lg-4">
-                                <div class="card" style="position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Melbourne-Australia.jpg); background-position: center; background-size: cover">
-                                    <div class="card-body" style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                                      <button class="btn btn-primary">Melbourne - Australia</button>
-                                    </div>
-                                  </div>  
-                            </div>
-        
-                            <div id="Santorini" class="col-12-xsm col-sm-6 col-lg-4">
-                                <div class="card" style="position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Santorini.jpg); background-position: center; background-size: cover">
-                                    <div class="card-body" style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
-                                      <button class="btn btn-primary">Santorini - Greece</button>
-                                    </div>
-                                  </div>  
-                            </div>
-                    </div><!-- container just to show line between two assignments!-->
+                        </div>
 
-                
-                
-               
-                    
+                        <div id="rec4" class="col-12-xsm col-sm-6 col-lg-4">
+                            <div class="card"
+                                style="position: relative; margin-top: 20px; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Rome.jpg); background-position: center; background-size: cover">
+                                <div class="card-body"
+                                    style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
+                                    <button id="Rome-button" class="btn btn-primary">Rome - Italy</button>
+                                </div>
+                            </div>
+                        </div>
 
-                </div>
+                        <div id="rec5" class="col-12-xsm col-sm-6 col-lg-4">
+                            <div class="card"
+                                style="position: relative; margin-top: 20px; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Venice.jpg); background-position: center; background-size: cover">
+                                <div class="card-body"
+                                    style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
+                                    <button id="Venice-button" class="btn btn-primary">Venice - Italy</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="rec6" class="col-12-xsm col-sm-6 col-lg-4">
+                            <div class="card"
+                                style="position: relative; margin-top: 20px; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Honolulu.jpg); background-position: center; background-size: cover">
+                                <div class="card-body"
+                                    style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
+                                    <button id="Honolulu-button" class="btn btn-primary">Honolulu - Hawaii</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="rec7" class="col-12-xsm col-sm-6 col-lg-4">
+                            <div class="card"
+                                style="position: relative; margin-top: 20px; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Freiburg.jpg); background-position: center; background-size: cover">
+                                <div class="card-body"
+                                    style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
+                                    <button id="Freiburg-button" class="btn btn-primary">Freiburg im Breisgau -
+                                        Germany</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="rec8" class="col-12-xsm col-sm-6 col-lg-4">
+                            <div class="card"
+                                style="position: relative; margin-top: 20px; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Melbourne-Australia.jpg); background-position: center; background-size: cover">
+                                <div class="card-body"
+                                    style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
+                                    <button id="Melbourne-button" class="btn btn-primary">Melbourne - Australia</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="rec9" class="col-12-xsm col-sm-6 col-lg-4">
+                            <div class="card"
+                                style="position: relative; margin-top: 20px; margin-right: 15px; width: 100%; height: 250px; background-image: url(Assets/RecomendedPlaces/Santorini.jpg); background-position: center; background-size: cover">
+                                <div class="card-body"
+                                    style="margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);">
+                                    <button id="Santorini-button" class="btn btn-primary">Santorini - Greece</button>
+                                </div>
+                            </div>
+                        </div><!-- container just to show line between two assignments!-->
+
+
+
+
+
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -365,7 +386,7 @@
                             Popular Destination</h3>
                         <div class="card-body">
                             <div id="touristSites">
-                </div>
+                            </div>
                         </div>
                     </div> <!-- destination card ends here-->
                 </div> <!-- row for currency and popular destination ends here-->
@@ -593,6 +614,7 @@
 
 // JavaScript for cuurency ends here 
     </script>
+    <script src="hardcoded.js"></script>
 </body>
 
 </html>
