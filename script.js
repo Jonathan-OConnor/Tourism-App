@@ -377,7 +377,7 @@ function buildMap(lat, lng) {
 
 async function getPlaces( lon, lat ){
     document.querySelector('#touristSites').innerHTML = ""
-     popularURL = `https://api.opentripmap.com/0.1/en/places/radius?apikey=5ae2e3f221c38a28845f05b6e8aa796e24785137e8a2f08be2186c12&radius=1000&lon=${lon}&lat=${lat}&rate=3h`
+     popularURL = `https://api.opentripmap.com/0.1/en/places/radius?apikey=5ae2e3f221c38a28845f05b6e8aa796e24785137e8a2f08be2186c12&radius=1=5000&lon=${lon}&lat=${lat}&rate=3h`
     popularData = await fetch( popularURL ).then( r=>r.json() )
     var popularLocations = 5
     for( var i=0; i<popularLocations; i++ ){
