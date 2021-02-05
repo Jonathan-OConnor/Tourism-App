@@ -387,8 +387,8 @@ async function getPlaces(lon, lat) {
         var wikiData = popularData.features[i].properties.wikidata
         document.querySelector('#touristSites').innerHTML += `
         <ul class="list-group d-inline-flex p-2 bd-highlight">
-            <li class="list-group-item">${locationName}</li>
-            <a class="list-group-item" href="http://www.wikidata.org/entity/${wikiData}">http://www.wikidata.org/entity/${wikiData}</a>
+            <ul class="list-group-item; border-0">${locationName}</ul>
+            <a class="list-group-item; border-0" href="http://www.wikidata.org/entity/${wikiData}">http://www.wikidata.org/entity/${wikiData}</a>
         </ul>
         `
     }
