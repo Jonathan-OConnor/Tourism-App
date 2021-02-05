@@ -38,6 +38,9 @@ async function search(event) {
 
         var text = document.createElement("button")
         text.setAttribute("class", "btn btn-primary")
+        text.setAttribute("style", "background-color: #3078C6;")
+
+
         var test = JSON.stringify(resultList[i])
         text.setAttribute("onClick", `buildCityPage(${test})`)
         text.innerText = bodyText
