@@ -52,7 +52,9 @@ async function search(event) {
 }
 
 function buildCityPage(cityObject) {
+    userCity = cityObject
 
+    checkIfFav()
 
 
     // build weather
@@ -392,3 +394,49 @@ async function getPlaces( lon, lat ){
     }
 
 }
+var favList = []
+if (localStorage.favList){
+    favList= JSON.parse(localStorage.favList)
+}
+
+ function favouritedButton(){
+
+    if (document.getElementById("favouritesButton").className === "far fa-star"){
+        document.getElementById('favouritesButton').removeAttribute('class')
+        document.getElementById('favouritesButton').setAttribute('class','fas fa-star')
+        //save country id to local storage, append to a new array to show the cards
+        //localStorage.setItem(JSON.stringify(userCity), JSON.stringify(userCity))
+        //let newFav = localStorage[`${JSON.stringify(userCity)}`]= JSON.stringify(userCity)
+        favList.push(userCity)
+        localStorage.favList = JSON.stringify(favList)
+
+    }
+    else if(document.getElementById("favouritesButton").className === "fas fa-star"){
+        document.getElementById('favouritesButton').removeAttribute('class')
+        document.getElementById('favouritesButton').setAttribute('class','far fa-star')
+        
+        favList = favList.filter(function(item) {
+            return item !== userCity
+        })
+        localStorage.favList = JSON.stringify(favList)
+
+    }
+    }
+
+    function checkIfFav(){
+        var checkList = []
+        for (var i =0; i < favList.length; i++){
+        checkList.push(JSON.stringify(favList[i]))
+            }
+        
+        if (checkList.includes(JSON.stringify(userCity)) == true){
+            document.getElementById('favouritesButton').removeAttribute('class')
+            document.getElementById('favouritesButton').setAttribute('class','fas fa-star')
+        }
+        else {
+            document.getElementById('favouritesButton').removeAttribute('class')
+            document.getElementById('favouritesButton').setAttribute('class','far fa-star')
+        }
+    }
+
+   

@@ -25,6 +25,8 @@
       crossorigin="anonymous"
     />
     <link rel="icon" href="Assets/logo33.png">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
     <title>Tourism</title>
 </head>
 
@@ -156,6 +158,12 @@
         <div id="favourites" class="d-none">
         </div>
         <div id="city-information" class="d-none">
+            <!-- favourites button-->
+            <div class='d-flex justify-items-right'>
+                <button id="favouritesButton" class="far fa-star" onclick='favouritedButton()'>
+                    Favourite
+                </button>
+            </div>
             <div id="weatherContainer" class="container" style="margin-bottom: 15px;">
                 <!-- weather information for a city starts here-->
                 <div class="row">
