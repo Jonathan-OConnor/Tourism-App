@@ -482,3 +482,5 @@ function buildFavs() {
     }
 
 }
+
+document.getElementById("btnFavourite").addEventListener("click", showFavouritesPage)
