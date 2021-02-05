@@ -20,7 +20,6 @@ async function search(event) {
         document.getElementById("navbarSearch").value = ""
         showSearchPage()
     }
-
     // FUNCTION THAT MAKES SEARCH RESULTS PAGE
     for (var i = 0; i < resultList.length; i++) {
         var bodyText = `${resultList[i].name} - ${resultList[i].countryName}`
@@ -50,7 +49,22 @@ async function search(event) {
         cardBody.appendChild(text)
         document.getElementById("results").appendChild(column)
     }
-    // 
+    // display amount of recommendatinos based on number of search results
+    for (var i = 1; i <= 9; i++){
+        document.getElementById(`rec${i}`).classList.add("d-none")
+    } 
+    var resultCount = resultList.length
+    var totalRecommended = 9
+    if (resultCount > 6) {
+        totalRecommended = 3
+    } else if (resultCount > 3) {
+        totalRecommended = 6
+    }
+    for (var i = 1; i <= totalRecommended; i++){
+        document.getElementById(`rec${i}`).classList.remove("d-none")
+    } 
+
+
     console.log(resultList)
 }
 
