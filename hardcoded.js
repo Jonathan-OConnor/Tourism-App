@@ -57,14 +57,14 @@ var tokyo = {
     'name': "Tokyo",
     'nearestCity': "https://api.teleport.org/api/urban_areas/slug:tokyo/"
 }
-var bora = {
-    'countryCode': "PF",
-    'countryName': "French Polynesia",
-    'image': "Assets/RecommendedPlaces/bora-bora.jpg",
-    'lat': "-16.499701",
-    'long': "151.770538",
-    'name': 'Bora Bora',
-    'nearestCity': ""
+var rome = {
+    'countryCode': "IT",
+    'countryName': "Italy",
+    'image': "https://d13k13wj6adfdf.cloudfront.net/urban_areas/rome-d6d22de42a.jpg",
+    'lat': "41.89193",
+    'long': "12.51133",
+    'name': "Rome",
+    'nearestCity': "https://api.teleport.org/api/urban_areas/slug:rome/"
 }
 var venice = {
     'countryCode': "IT",
@@ -121,7 +121,7 @@ document.getElementById("Mykonos-button").addEventListener("click", buildMykonos
 document.getElementById("Cairo-button").addEventListener("click", buildCairo)
 document.getElementById("Auckland-button").addEventListener("click", buildAuckland)
 document.getElementById("Tokyo-button").addEventListener("click", buildTokyo)
-document.getElementById("Bora-button").addEventListener("click", buildBora)
+document.getElementById("Rome-button").addEventListener("click", buildRome)
 document.getElementById("Venice-button").addEventListener("click", buildVenice)
 document.getElementById("Honolulu-button").addEventListener("click", buildHonolulu)
 document.getElementById("Freiburg-button").addEventListener("click", buildFreiburg)
@@ -153,8 +153,8 @@ function buildAuckland() {
 function buildTokyo() {
     buildCityPage(tokyo)
 }
-function buildBora() {
-    buildCityPage(bora)
+function buildRome() {
+    buildCityPage(rome)
 }
 
 function buildVenice() {

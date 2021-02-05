@@ -49,6 +49,12 @@ async function search(event) {
         cardBody.appendChild(text)
         document.getElementById("results").appendChild(column)
     }
+    if (resultList.length == 0){
+        var error = document.createElement("p")
+        error.innerText= "Sorry, that search did not match a city we could find"
+        document.getElementById("results").appendChild(error)
+    }
+
     // display amount of recommendatinos based on number of search results
     for (var i = 1; i <= 9; i++){
         document.getElementById(`rec${i}`).classList.add("d-none")
@@ -64,8 +70,6 @@ async function search(event) {
         document.getElementById(`rec${i}`).classList.remove("d-none")
     } 
 
-
-    console.log(resultList)
 }
 
 function buildCityPage(cityObject) {
