@@ -67,7 +67,7 @@ function buildCityPage(cityObject) {
     getCurrency(cityObject.countryCode)
 
     // build interesting places
-    getPlaces( cityObject.long, cityObject.lat)
+    getPlaces(cityObject.long, cityObject.lat)
 
     // navigate to city page
     showCityPage()
@@ -80,7 +80,7 @@ async function cityNames(userCity) {
     var list = []
 
     // get at most 9 cities which roughly match the name searched
-    var apiData = await fetch(`http://api.geonames.org/searchJSON?name=${userCity}&fuzzy=0.8&cities=cities5000&maxRows=9&username=JonathanO`).then(r => r.json())
+    var apiData = await fetch(`https://secure.geonames.org/searchJSON?name=${userCity}&fuzzy=0.8&cities=cities5000&maxRows=9&username=JonathanO`).then(r => r.json())
     var resultData = apiData.geonames
 
     // store the important information about a city as an object. Put this object into a list
@@ -137,7 +137,7 @@ function showSearchPage() {
 }
 
 function showFavouritesPage() {
-
+    buildFavs()
     document.querySelector('#homepage').classList.add("d-none")
     document.querySelector('#favourites').classList.remove('d-none')
     document.querySelector('#search-results').classList.add('d-none')
@@ -160,7 +160,7 @@ function showCityPage() {
 async function makeWeather(city, stateCode) {
 
 
-    var cityApi = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)},${stateCode}&appid=c18d1c67b725426cb4da6690f0f0a919`).then(r => r.json())
+    var cityApi = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(city)},${stateCode}&appid=c18d1c67b725426cb4da6690f0f0a919`).then(r => r.json())
     var cityLon = cityApi.coord.lon;
     var cityLat = cityApi.coord.lat;
 
@@ -380,12 +380,12 @@ function buildMap(lat, lng) {
     });
 }
 
-async function getPlaces( lon, lat ){
+async function getPlaces(lon, lat) {
     document.querySelector('#touristSites').innerHTML = ""
-     popularURL = `https://api.opentripmap.com/0.1/en/places/radius?apikey=5ae2e3f221c38a28845f05b6e8aa796e24785137e8a2f08be2186c12&radius=5000&lon=${lon}&lat=${lat}&rate=3h`
-    popularData = await fetch( popularURL ).then( r=>r.json() )
+    popularURL = `https://api.opentripmap.com/0.1/en/places/radius?apikey=5ae2e3f221c38a28845f05b6e8aa796e24785137e8a2f08be2186c12&radius=5000&lon=${lon}&lat=${lat}&rate=3h`
+    popularData = await fetch(popularURL).then(r => r.json())
     var popularLocations = 5
-    for( var i=0; i<popularLocations; i++ ){
+    for (var i = 0; i < popularLocations; i++) {
         var locationName = popularData.features[i].properties.name
         var wikiData = popularData.features[i].properties.wikidata
         document.querySelector('#touristSites').innerHTML += `
@@ -398,48 +398,92 @@ async function getPlaces( lon, lat ){
 
 }
 var favList = []
-if (localStorage.favList){
-    favList= JSON.parse(localStorage.favList)
+if (localStorage.favList) {
+    favList = JSON.parse(localStorage.favList)
 }
 
- function favouritedButton(){
+function favouritedButton() {
 
-    if (document.getElementById("favouritesButton").className === "far fa-star"){
+    if (document.getElementById("favouritesButton").className === "far fa-star") {
         document.getElementById('favouritesButton').removeAttribute('class')
-        document.getElementById('favouritesButton').setAttribute('class','fas fa-star')
-        //save country id to local storage, append to a new array to show the cards
-        //localStorage.setItem(JSON.stringify(userCity), JSON.stringify(userCity))
-        //let newFav = localStorage[`${JSON.stringify(userCity)}`]= JSON.stringify(userCity)
+        document.getElementById('favouritesButton').setAttribute('class', 'fas fa-star')
+
         favList.push(userCity)
         localStorage.favList = JSON.stringify(favList)
 
     }
-    else if(document.getElementById("favouritesButton").className === "fas fa-star"){
+    else if (document.getElementById("favouritesButton").className === "fas fa-star") {
         document.getElementById('favouritesButton').removeAttribute('class')
-        document.getElementById('favouritesButton').setAttribute('class','far fa-star')
-        
-        favList = favList.filter(function(item) {
-            return item !== userCity
+        document.getElementById('favouritesButton').setAttribute('class', 'far fa-star')
+        var checkList = []
+        for (var i = 0; i < favList.length; i++) {
+            checkList.push(JSON.stringify(favList[i]))
+        }
+        checkList = checkList.filter(function (item) {
+            return item !== JSON.stringify(userCity)
         })
+        favList = []
+        for (var i = 0; i < checkList.length; i++) {
+            favList.push(JSON.parse(checkList[i]))
+        }
         localStorage.favList = JSON.stringify(favList)
 
     }
-    }
+}
 
-    function checkIfFav(){
-        var checkList = []
-        for (var i =0; i < favList.length; i++){
+function checkIfFav() {
+    var checkList = []
+    for (var i = 0; i < favList.length; i++) {
         checkList.push(JSON.stringify(favList[i]))
-            }
-        
-        if (checkList.includes(JSON.stringify(userCity)) == true){
-            document.getElementById('favouritesButton').removeAttribute('class')
-            document.getElementById('favouritesButton').setAttribute('class','fas fa-star')
-        }
-        else {
-            document.getElementById('favouritesButton').removeAttribute('class')
-            document.getElementById('favouritesButton').setAttribute('class','far fa-star')
+    }
+
+    if (checkList.includes(JSON.stringify(userCity)) == true) {
+        document.getElementById('favouritesButton').removeAttribute('class')
+        document.getElementById('favouritesButton').setAttribute('class', 'fas fa-star')
+    }
+    else {
+        document.getElementById('favouritesButton').removeAttribute('class')
+        document.getElementById('favouritesButton').setAttribute('class', 'far fa-star')
+    }
+}
+
+
+function buildFavs() {
+    document.getElementById("favouritesCards").innerHTML = ''
+
+    if (favList.length == 0) {
+        var errorMsg = document.createElement("p")
+        errorMsg.innerText = "Sorry, it doesn't look like you have any favourites :("
+        document.getElementById("favouritesCards").appendChild(errorMsg)
+
+    } else {
+        for (var i = 0; i < favList.length; i++) {
+            var bodyText = `${favList[i].name} - ${favList[i].countryName}`
+            var backgroundImage = favList[i].image
+
+            var column = document.createElement("div")
+            column.setAttribute("class", " col-12-xsm col-sm-6 col-lg-4")
+
+            var card = document.createElement("div")
+            card.setAttribute("style", `position: relative; margin-right: 15px; width: 100%; height: 250px; background-image: url("${backgroundImage}"); background-position: center; background-size: cover; margin-top: 20px;`)
+
+            var cardBody = document.createElement("div")
+            cardBody.setAttribute("class", "card-body")
+            cardBody.setAttribute("style", "margin: 0; top: 50%; left: 50%; position: absolute; -ms-transform: translate(-50%,-50%); transform: translate(-50%, -50%);")
+
+            var text = document.createElement("button")
+            text.setAttribute("class", "btn btn-primary")
+            var test = JSON.stringify(favList[i])
+            text.setAttribute("onClick", `buildCityPage(${test})`)
+            text.innerText = bodyText
+
+            column.appendChild(card)
+            card.appendChild(cardBody)
+            cardBody.appendChild(text)
+            document.getElementById("favouritesCards").appendChild(column)
         }
     }
 
-   
+}
+
+document.getElementById("btnFavourite").addEventListener("click", showFavouritesPage)
