@@ -16,13 +16,13 @@ This application has the following features:
 
 ## Screenshots:
 
-The following pictures show the web application's appearance and functionality;
+The following pictures show the web application's appearance and functionality:
 
 ![Homepage of Tourism App](/Assets/homepageSC.png)
 
-![Alt](/Assets/.png)
+![Result page of the city of Tokyo and list of recomended places](/Assets/searchResultSC.png)
 
-![Alt](/Assets/.png)
+![Page displays information about the city of Tokyo](/Assets/cityInfoSC.png)
 
 ## Participants (alphabetical order):
 
@@ -34,4 +34,4 @@ The following pictures show the web application's appearance and functionality;
 
 ## Live URL of the deployed application:
 
-[please click here]()
+[please click here](https://jonathan-oconnor.github.io/Tourism-App/)
